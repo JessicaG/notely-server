@@ -1,4 +1,5 @@
 const verifyApi = require('./verify_api')
+const userApi = require('./user_api')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -23,6 +24,17 @@ router.post('/api/v1/authenticate/verify', function(req, res, next){
     .then(response => res.json(response.data))
 })
 
+router.get('/api/v1/login', function (requ, res, next) {
+	userApi.loginRequest(req.body)
+		.catch(error => console.log(error) || res.status(500).send(error))
+    	.then(response => res.json(response.data))
+})
+
+router.post('/api/v1/register', function (requ, res, next) {
+	userApi.registrationRequest(req.body)
+		.catch(error => console.log(error) || res.status(500).send(error))
+    	.then(response => res.json(response.data))
+})
 app.use('/', router)
 
 app.listen(3000, function () {
