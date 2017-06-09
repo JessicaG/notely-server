@@ -12,8 +12,8 @@ app.use(function(err, req, res, next){
 	next(err)
 })
 
-router.get('/api/v1/authenticate/:number', function(req, res, next){
-  verifyApi.verifyRequest(req.params.number)
+router.get('/api/v1/authenticate/:phone_number', function(req, res, next){
+  verifyApi.verifyRequest(req.params.phone_number)
     .catch(error => console.log(error) || res.status(500).send(error))
     .then(response => res.json(response.data))
 })
@@ -32,7 +32,7 @@ router.get('/api/v1/login', function (requ, res, next) {
 
 router.post('/api/v1/register', function (requ, res, next) {
 	userApi.registrationRequest(req.body)
-		.catch(error => console.log(error) || res.status(500).send(error))
+		.catch(error => console.log(error) || res.status(500).send(error))	
     	.then(response => res.json(response.data))
 })
 app.use('/', router)
